@@ -1,8 +1,9 @@
 # GET
 
-Home page    /
-Gets survey  /:survey_id
-Results      /:survey_id/results
+Home page     /
+Gets survey   /:survey_id
+Results       /:survery_id/results
+Create survey /new
 
 
 # POST
