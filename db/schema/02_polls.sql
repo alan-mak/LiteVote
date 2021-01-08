@@ -4,5 +4,6 @@ CREATE TABLE polls (
 id SERIAL PRIMARY KEY NOT NULL,
 title TEXT NOT NULL,
 num_choices SMALLINT,
-admin_id INTEGER REFERENCES users(id) ON DELETE CASCADE
+admin_id INTEGER REFERENCES users(id),
+user_email TEXT REFERENCES users(email)
 );

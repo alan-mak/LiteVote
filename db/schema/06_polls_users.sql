@@ -2,6 +2,6 @@ DROP TABLE IF EXISTS polls_users CASCADE;
 
 CREATE TABLE polls_users (
   id SERIAL PRIMARY KEY NOT NULL,
-  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-  poll_id INTEGER REFERENCES polls(id) ON DELETE CASCADE
+  user_id INTEGER REFERENCES users(id),
+  poll_id INTEGER REFERENCES polls(id)
 );
