@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-08T18:01:06.441Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="I0VkcEWHsSkknoyDu04a" version="14.1.8" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-08T18:01:57.631Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36" etag="XvMhZ7GCI8IXyzf6C5zx" version="14.1.8" type="github">
   <diagram id="_ZeF5XLmBIIkiQpLwpKp" name="Page-1">
     <mxGraphModel dx="1426" dy="826" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -49,7 +49,7 @@
         <mxCell id="y_xWUEmitpNGUvJh6seL-4" value="" style="line;strokeWidth=4;html=1;perimeter=backbonePerimeter;points=[];outlineConnect=0;rotation=0;" vertex="1" parent="1">
           <mxGeometry x="480" y="200" width="30" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="y_xWUEmitpNGUvJh6seL-5" value="user_id&lt;br&gt;name&lt;br&gt;user_email" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="y_xWUEmitpNGUvJh6seL-5" value="user_id&lt;br&gt;Title&lt;br&gt;user_email" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="490" y="120" width="150" height="170" as="geometry" />
         </mxCell>
         <mxCell id="y_xWUEmitpNGUvJh6seL-6" value="Polls" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
