@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS users_choices CASCADE;
+
+CREATE TABLE users_choices (
+  id INTEGER SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  choice_id INTEGER REFERENCES choices(id) ON DELETE CASCADE,
+  rank SMALLINT
+);
