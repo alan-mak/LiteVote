@@ -12,19 +12,23 @@ router.get("/new", (req, res) => {
 
 router.get("/:survey_id", (req, res) => {
   const survey_id = req.params.survey_id;
-  db.query('SELECT * FROM polls JOIN choices ON polls.id = choices.poll_id WHERE poll_id = $1', [survey_id])
+  db.query('SELECT polls.title, choices.title AS choices_title, choices.description FROM polls JOIN choices ON polls.id = choices.poll_id WHERE poll_id = $1;', [survey_id])
   .then(data => {
     const survey = data.rows;
-    for (let entry of survey) {
-      console.log(entry.title);
-    }
-    res.render("survey", survey);
+    console.log(survey);
+    res.render("survey", { survey } );
   });
 
 })
 
 router.get("/:survey_id/results", (req, res) => {
-  res.render("results");
+  const survey_id = req.params.survey_id;
+  db.query('SELECT polls.title AS poll, choices.title, choices.total_points FROM polls JOIN choices on polls.id = choices.poll_id WHERE poll_id = $1;', [survey_id])
+  .then(data => {
+    const results = data.rows;
+    console.log(results);
+    res.render("results", { results });
+  })
 });
   return router;
 };
