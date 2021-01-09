@@ -1,0 +1,13 @@
+$middle: center;
+
+body {
+  h2 {
+    display: flex;
+    justify-content: $middle;
+  }
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
