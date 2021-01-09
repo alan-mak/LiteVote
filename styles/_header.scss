@@ -1,7 +1,8 @@
+$background-color: #FFD8BB;
 .navbar {
   border: 1px solid black;
   height: 100px;
-  background-color: #ffdc7f;
+  background-color: $background-color;
   display: flex;
   flex-direction: column;
   justify-content: center;
