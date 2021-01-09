@@ -1,0 +1,12 @@
+$background-color: #FFD8BB;
+$middle: center;
+
+footer {
+  display: flex;
+  justify-content: $middle;
+  width: 100%;
+  background-color: $background-color;
+  font-size: 0.9em;
+  position: absolute;
+  bottom:0;
+}
