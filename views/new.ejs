@@ -19,6 +19,7 @@
   <%- include ./partials/_header.ejs %>
     <h1>New Poll</h1>
     <form method="POST" action="DATABASE">
+      <input type="email" name="email" id="creator_email" placeholder="Creator Email"></input>
       <textarea name="poll" id="poll_name" placeholder="What do you want a poll about?"></textarea>
       <div>
         <button type="button">Add Options</button>
