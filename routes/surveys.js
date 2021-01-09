@@ -9,6 +9,11 @@ router.get('/', (req, res) => {
     const polls = data.rows;
     res.render('index', { polls });
   })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 
 });
 router.get("/new", (req, res) => {
@@ -22,6 +27,11 @@ router.get("/:survey_id", (req, res) => {
     const survey = data.rows;
     console.log(survey);
     res.render("survey", { survey } );
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
   });
 
 })
@@ -34,6 +44,11 @@ router.get("/:survey_id/results", (req, res) => {
     console.log(results);
     res.render("results", { results });
   })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 });
   return router;
 };
