@@ -8,7 +8,7 @@ body {
     textarea {
       overflow: hidden;
       resize: none;
-      height: 20%
+      height: 20%;
     }
 
     div {
@@ -16,4 +16,7 @@ body {
       justify-content: space-between;
     }
   }
+}
+#creator_email {
+  height: 1.5em;
 }
