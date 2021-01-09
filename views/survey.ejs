@@ -26,11 +26,13 @@
         <section id=optionContainer>
           <h2>Rank</h2>
           <div>
+            <form>
             <% for (let entry of survey)  { %>
                <h3><%= entry.choices_title %></h3>
                <p><%= entry.description %></p>
             <% } %>
-            <p></p>
+
+          </form>
           </div>
         </section>
       </div>
