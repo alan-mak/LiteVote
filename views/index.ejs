@@ -19,7 +19,9 @@
     <div><h1>Polls</h1></div>
     <main class="previousContainer">
       <section>
-        <h4>Previous Poll Taken / Created By User</h4>
+        <% for (let poll of polls) { %>
+        <h4><%= poll.title %></h4>
+        <% } %>
         <p class="content">The group has decided to go here.</p>
       </section>
     </main>
