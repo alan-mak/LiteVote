@@ -1,4 +1,4 @@
-$background-color: #FFD8BB;
+$background-color: #5FA9B3;
 .navbar {
   border: 1px solid black;
   height: 100px;
@@ -14,9 +14,15 @@ $background-color: #FFD8BB;
   margin: 0;
   width: 100vw;
   padding: 0;
+  li {
+    list-style-type: none;
+    padding: 20px;
+    margin-right: 5px;
+  }
 }
-li {
-  list-style-type: none;
-  padding: 20px;
-  margin-right: 5px;
+
+
+li :hover {
+  border: 1px solid black;
+  box-shadow: 8px 9px 28px 5px #000000;
 }
