@@ -20,21 +20,24 @@
     <main>
       <h1>Survey</h1>
       <div>
-        <h2>Poll</h2>
+        <h2><%= survey[0].title %></h2>
       </div>
-      <div>
+      <div class="container">
         <section id=optionContainer>
           <h2>Rank</h2>
           <div>
-            <%- for (let entry of survey)  { %>
-            <h3><%- entry.title %></h3>
-            <p><%- entry.description %></p>
-            <%- } %>
-            <p></p>
+            <form>
+            <% for (let entry of survey)  { %>
+               <h3><%= entry.choices_title %></h3>
+               <p><%= entry.description %></p>
+               <input type="dropdown" class="drop-menu">
+            <% } %>
+            <br>
+            <button type="submit">Submit</button>
+          </form>
           </div>
         </section>
       </div>
     </main>
     <%- include ./partials/_footer.ejs %>
-
 </html>
