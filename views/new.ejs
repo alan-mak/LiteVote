@@ -13,6 +13,7 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/newOptions.js"></script>
 </head>
 
 <body>
@@ -22,10 +23,11 @@
       <input type="email" name="email" id="creator_email" placeholder="Creator Email"></input>
       <textarea name="poll" id="poll_name" placeholder="What do you want a poll about?"></textarea>
       <div>
-        <button type="button">Add Options</button>
+        <button type="button" class="add">Add Options</button>
         <button type="submit">Submit</button>
       </div>
     </form>
+  <section id="option_container"></section>
 </body>
 <%- include ./partials/_footer.ejs %>
 
