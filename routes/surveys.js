@@ -4,7 +4,12 @@ const router  = express.Router();
 
 module.exports = (db) => {
 router.get('/', (req, res) => {
-  res.render('index');
+  db.query('SELECT polls.title FROM polls;')
+  .then(data => {
+    const polls = data.rows;
+    res.render('index', { polls });
+  })
+
 });
 router.get("/new", (req, res) => {
   res.render("new")
