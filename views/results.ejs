@@ -19,14 +19,15 @@
   <%- include ./partials/_header.ejs %>
 
     <h1>Results</h1>
-    <h2>Poll</h2>
+    <h2><%= results[0].poll %> </h2>
     <div>
       <div id="chart">This will be a chart</div>
       <div id="results">
         <ol>
-          <li>Option 1</li>
-          <li>Option 2</li>
-          <li>Option 3</li>
+          <% for (let result of results) { %>
+          <li><%= result.title %></li>
+          <!-- <li><%= results.total_points %></li> -->
+          <% } %>
         </ol>
       </div>
     </div>
