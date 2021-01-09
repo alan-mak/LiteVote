@@ -50,6 +50,18 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
+app.get("/new", (req, res) => {
+  res.render("new")
+})
+
+app.get("/:survey_id", (req, res) => {
+  res.render("survey")
+})
+
+app.get("/:survey_id/results", (req, res) => {
+  res.render("results");
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

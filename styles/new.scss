@@ -1,0 +1,19 @@
+body {
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    margin: 0 auto;
+    textarea {
+      overflow: hidden;
+      resize: none;
+      height: 20%
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
