@@ -22,7 +22,7 @@
       <div>
         <h2><%= survey[0].title %></h2>
       </div>
-      <div>
+      <div class="container">
         <section id=optionContainer>
           <h2>Rank</h2>
           <div>
@@ -30,8 +30,10 @@
             <% for (let entry of survey)  { %>
                <h3><%= entry.choices_title %></h3>
                <p><%= entry.description %></p>
+               <input type="dropdown" class="drop-menu">
             <% } %>
-
+            <br>
+            <button type="submit">Submit</button>
           </form>
           </div>
         </section>
