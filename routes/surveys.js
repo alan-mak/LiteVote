@@ -13,6 +13,8 @@ const data = {
 };
 
 
+let generateRandomString = require('../public/scripts/generateString.js')
+
 module.exports = (db) => {
 router.get('/', (req, res) => {
   db.query('SELECT polls.title FROM polls;')
@@ -33,11 +35,16 @@ router.get("/new", (req, res) => {
 })
 
 router.post("/new", (req, res) => {
-  console.log(req.body);
+
+  let id = generateRandomString();
+  console.log(req.body)
+  console.log(id)
+
   mg.messages().send(data, function (error, body) {
     console.log(body);
     console.log(error);
   });
+
 
 })
 
