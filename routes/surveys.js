@@ -2,7 +2,7 @@
 const express = require('express');
 const router  = express.Router();
 
-let generateRandomString = () => Math.random().toString(36).substring(2,8);
+let generateRandomString = require('../public/scripts/generateString.js')
 
 module.exports = (db) => {
 router.get('/', (req, res) => {
@@ -26,6 +26,7 @@ router.get("/new", (req, res) => {
 router.post("/new", (req, res) => {
   let id = generateRandomString();
   console.log(req.body)
+  console.log(id)
 })
 
 router.get("/:survey_id", (req, res) => {
