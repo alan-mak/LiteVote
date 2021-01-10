@@ -15,13 +15,16 @@ body {
       display: flex;
       justify-content: space-between;
     }
+    #option_container {
+      .option_and_description{
+        margin: 1em 0;
+        flex-direction: column;
+      }
+    }
   }
 }
 #creator_email {
   height: 1.5em;
 }
 
-.option_and_description{
-  margin: 1em 0;
-}
 

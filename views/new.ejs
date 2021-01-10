@@ -19,15 +19,16 @@
 <body>
   <%- include ./partials/_header.ejs %>
     <h1>New Poll</h1>
-    <form method="POST" action="DATABASE">
+    <!-- Need to add where it is posting to with action -->
+    <form method="POST">
       <input type="email" name="email" id="creator_email" placeholder="Creator Email"></input>
       <textarea name="poll" id="poll_name" placeholder="What do you want a poll about?"></textarea>
       <div>
         <button type="button" class="add">Add Options</button>
-        <button type="submit">Submit</button>
+        <input type="submit" value="Submit"></input>
       </div>
+      <section id="option_container"></section>
     </form>
-  <section id="option_container"></section>
 </body>
 <%- include ./partials/_footer.ejs %>
 
