@@ -3,8 +3,7 @@ const express = require('express');
 const router  = express.Router();
 
 const mailgun = require("mailgun-js")
-const DOMAIN = "sandbox12380c005e9e430a9a24bf7178babe5b.mailgun.org";
-const mg = mailgun({apiKey: "64b289ef4faf09fd1e078f5344f27f44-3d0809fb-9ef7d0a0", domain: DOMAIN});
+
 
 
 //Sample Email for testing
