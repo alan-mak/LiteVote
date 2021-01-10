@@ -14,6 +14,7 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/newOptions.js"></script>
+  <script type="text/javascript" src="scripts/mailgun.js"></script>
 </head>
 
 <body>
@@ -22,6 +23,7 @@
     <!-- Need to add where it is posting to with action -->
     <form method="POST">
       <div>
+
         <label for="name">Creator Name</label>
         <input type="name" name="name" id="creator_name" placeholder="eg. Michael Scott"></input>
       </div>
@@ -36,6 +38,7 @@
       <div>
         <button type="button" class="add">Add Option</button>
         <button type="submit">Submit</button>
+
       </div>
       <section id="option_container"></section>
     </form>
