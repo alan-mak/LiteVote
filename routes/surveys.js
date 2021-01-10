@@ -1,6 +1,17 @@
 
 const express = require('express');
 const router  = express.Router();
+const mailgun = require("mailgun-js");
+const DOMAIN = "sandbox12380c005e9e430a9a24bf7178babe5b.mailgun.org";
+const mg = mailgun({apiKey: "3d0809fb-9ef7d0a0", domain: DOMAIN});
+//Sample Email for testing
+const data = {
+	from: "Mailgun Sandbox <postmaster@sandbox12380c005e9e430a9a24bf7178babe5b.mailgun.org>",
+	to: "connor.mackay@gmail.com",
+	subject: "Hello",
+	text: "Testing some Mailgun awesomness!"
+};
+
 
 module.exports = (db) => {
 router.get('/', (req, res) => {
@@ -22,7 +33,12 @@ router.get("/new", (req, res) => {
 })
 
 router.post("/new", (req, res) => {
-  console.log(req.body)
+  console.log(req.body);
+  mg.messages().send(data, function (error, body) {
+    console.log(body);
+    console.log(error);
+  });
+
 })
 
 router.get("/:survey_id", (req, res) => {
@@ -30,7 +46,7 @@ router.get("/:survey_id", (req, res) => {
   db.query('SELECT polls.title, choices.title AS choices_title, choices.description FROM polls JOIN choices ON polls.id = choices.poll_id WHERE poll_id = $1;', [survey_id])
   .then(data => {
     const survey = data.rows;
-    console.log(survey);
+    (survey);
     res.render("survey", { survey } );
   })
   .catch(err => {
