@@ -1,9 +1,9 @@
 
 const express = require('express');
 const router  = express.Router();
-const mailgun = require("mailgun-js");
+// const mailgun = require("mailgun-js");
 const DOMAIN = "sandbox12380c005e9e430a9a24bf7178babe5b.mailgun.org";
-const mg = mailgun({apiKey: "3d0809fb-9ef7d0a0", domain: DOMAIN});
+// const mg = mailgun({apiKey: "3d0809fb-9ef7d0a0", domain: DOMAIN});
 //Sample Email for testing
 const data = {
 	from: "Mailgun Sandbox <postmaster@sandbox12380c005e9e430a9a24bf7178babe5b.mailgun.org>",
@@ -37,13 +37,14 @@ router.get("/new", (req, res) => {
 router.post("/new", (req, res) => {
 
   let id = generateRandomString();
-  console.log(req.body)
   console.log(id)
+  db.query('INSERT INTO users (name, email) VALUES ($1, $2);', [req.body.name, req.body.email]);
 
-  mg.messages().send(data, function (error, body) {
-    console.log(body);
-    console.log(error);
-  });
+
+  // mg.messages().send(data, function (error, body) {
+  //   console.log(body);
+  //   console.log(error);
+  // });
 
 
 })
