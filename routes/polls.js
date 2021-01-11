@@ -32,12 +32,13 @@ module.exports = (db) => {
     // let id = generateRandomString();
     // console.log(id)
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
-      .then(res=>{
-        console.log("Inserted data into Users ",res.rows[0].id);
+      .then(data=>{
+        console.log("Inserted data into Users ",data.rows[0].id);
         db.query(`INSERT INTO polls (title, num_choices, admin_id)
-    VALUES ($1, $2, $3);`, [req.body.poll, req.body.option.length, res.rows[0].id])
-          .then(res=>{
-            console.log("inserted data into polls",res);
+    VALUES ($1, $2, $3);`, [req.body.poll, req.body.option.length, data.rows[0].id])
+          .then(data=>{
+            console.log("inserted data into polls",data);
+            res.redirect('/')
           })
           .then(result => {
             console.log("POLLID IS HERE!: ", res.rows[0].id);
