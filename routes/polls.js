@@ -2,7 +2,9 @@
 const express = require('express');
 const router  = express.Router();
 
-const mailgun = require("mailgun-js");
+// const mailgun = require("mailgun-js")
+
+
 
 let generateRandomString = require('../public/scripts/generateString.js');
 
