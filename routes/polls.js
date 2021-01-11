@@ -71,7 +71,7 @@ module.exports = (db) => {
       .then(data => {
         const survey = data.rows;
         (survey);
-        res.render("survey", { survey });
+        res.render("survey", { survey, survey_id });
       })
       .catch(err => {
         res
@@ -81,6 +81,7 @@ module.exports = (db) => {
   });
 
   router.post("/:survey_id", (req, res) => {
+    console.log(req.body);
     db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
       .then(data => {
         const sender = data.rows[0].email;
