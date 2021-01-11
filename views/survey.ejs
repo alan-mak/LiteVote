@@ -27,18 +27,12 @@
         <section id=optionContainer>
           <div>
 
-            <form class="option">
+            <form class="option" action="/<%= survey_id %>" method="POST">
               <% for (let entry of survey) { %>
 
                <h3><%= entry.choices_title %></h3>
                <p><%= entry.description %></p>
-              <select>
-                <% for (let index in survey) {%>
-               <option class="drop-menu btn btn-primary dropdown-toggle">
-                <%= parseInt(index) + 1%>
-               </option>
-               <%} %>
-              </select>
+               <input type="number" min="1" max="<%=parseInt(survey.length) %>" class="drop-menu btn btn-primary dropdown-toggle" name="<%= entry.choices_title %>" id="<%= entry.choices_title %>">
             <% } %>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>
