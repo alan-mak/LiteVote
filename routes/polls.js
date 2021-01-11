@@ -4,16 +4,6 @@ const router  = express.Router();
 
 const mailgun = require("mailgun-js")
 
-
-//Sample Email for testing
-const data = {
-	from: "connor.mackay@gmail.com",
-	to: "alanmak95@gmail.com",
-	subject: "Hello",
-	text: "go bite a smelly pumpkin"
-};
-
-
 let generateRandomString = require('../public/scripts/generateString.js')
 
 module.exports = (db) => {
@@ -36,6 +26,16 @@ router.get("/new", (req, res) => {
 })
 
 router.post("/new", (req, res) => {
+  const data = {
+    from: "connor.mackay@gmail.com",
+    to: "alanmak95@gmail.com",
+    subject: "Hello",
+    text: `Your survey ${req.body.poll} has been created! access it here! `
+  };
+    mg.messages().send(data, function (error, body) {
+    console.log(body);
+    console.log(error);
+  });
 
   // let id = generateRandomString();
   // console.log(id)
@@ -56,10 +56,7 @@ router.post("/new", (req, res) => {
 
   });
 
-  //   mg.messages().send(data, function (error, body) {
-  //   console.log(body);
-  //   console.log(error);
-  // });
+
 });
 
 router.get("/:survey_id", (req, res) => {
@@ -75,8 +72,20 @@ router.get("/:survey_id", (req, res) => {
       .status(500)
       .json({ error: err.message });
   });
+});
 
-})
+router.post("/:survey_id", (req, res) => {
+  const data = {
+    from: "connor.mackay@gmail.com",
+    to: "alanmak95@gmail.com",
+    subject: "Hello",
+    text: `Someone has completed you're survey. Check their results here! ${adminlinkgoeshere}`
+  }
+  mg.messages().send(data, function (error, body) {
+    console.log(body);
+    console.log(error);
+  });
+});
 
 router.get("/:survey_id/results", (req, res) => {
   const survey_id = req.params.survey_id;
