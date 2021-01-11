@@ -1,15 +1,22 @@
 
 const express = require('express');
 const router  = express.Router();
+
 // const mailgun = require("mailgun-js");
-const DOMAIN = "sandbox12380c005e9e430a9a24bf7178babe5b.mailgun.org";
-// const mg = mailgun({apiKey: "3d0809fb-9ef7d0a0", domain: DOMAIN});
+
+
+
+const mailgun = require("mailgun-js")
+
+
+
+
 //Sample Email for testing
 const data = {
-	from: "Mailgun Sandbox <postmaster@sandbox12380c005e9e430a9a24bf7178babe5b.mailgun.org>",
-	to: "connor.mackay@gmail.com",
+	from: "connor.mackay@gmail.com",
+	to: "alanmak95@gmail.com",
 	subject: "Hello",
-	text: "Testing some Mailgun awesomness!"
+	text: "go bite a smelly pumpkin"
 };
 
 
@@ -50,6 +57,9 @@ router.post("/new", (req, res) => {
     res
       .status(500)
       .json({ error: err.message });
+
+
+
   });
 
   //   mg.messages().send(data, function (error, body) {
