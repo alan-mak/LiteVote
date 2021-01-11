@@ -26,7 +26,7 @@
         <section id=optionContainer>
           <h2>Rank</h2>
           <div>
-            <form>
+            <form method="POST">
             <% for (let entry of survey)  { %>
                <h3><%= entry.choices_title %></h3>
                <p><%= entry.description %></p>
