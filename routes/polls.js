@@ -38,11 +38,12 @@ router.post("/new", (req, res) => {
       console.log("inserted data into polls",res);
     })
     .then(result => {
+      console.log("POLLID IS HERE!: ", res.rows[0].id);
       const data = {
         from: `${req.body.email}`,
         to: "alanmak95@gmail.com",
         subject: "Hello",
-        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${result}`
+        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}`
       };
       //   mg.messages().send(data, function (error, body) {
       //   console.log(body);
@@ -77,12 +78,12 @@ router.get("/:survey_id", (req, res) => {
 });
 
 router.post("/:survey_id", (req, res) => {
-  console.log(req.body);
+  console.log(req);
   const data = {
     from: "connor.mackay@gmail.com",
     to: "alanmak95@gmail.com",
     subject: "Hello",
-    text: `Someone has completed you're survey. Check their results here! http://localhost:8080/`
+    text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
   }
   // mg.messages().send(data, function (error, body) {
   //   console.log(body);
