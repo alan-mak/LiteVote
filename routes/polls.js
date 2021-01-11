@@ -2,15 +2,7 @@
 const express = require('express');
 const router  = express.Router();
 
-<<<<<<< HEAD
-// const mailgun = require("mailgun-js");
-
-
-
 const mailgun = require("mailgun-js")
-
-
-
 
 
 //Sample Email for testing
