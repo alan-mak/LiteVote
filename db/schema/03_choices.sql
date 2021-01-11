@@ -5,5 +5,5 @@ id SERIAL PRIMARY KEY NOT NULL,
 poll_id INTEGER REFERENCES polls(id),
 title VARCHAR(255) NOT NULL,
 description TEXT,
-total_points INTEGER
+total_points INTEGER DEFAULT 0
 );

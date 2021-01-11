@@ -41,7 +41,6 @@ module.exports = (db) => {
             res.redirect('/')
           })
           .then(result => {
-            console.log("POLLID IS HERE!: ", res.rows[0].id);
             const data = {
               from: `${req.body.email}`,
               to: "alanmak95@gmail.com",
@@ -81,7 +80,11 @@ module.exports = (db) => {
   });
 
   router.post("/:survey_id", (req, res) => {
-    console.log(req.body);
+    const results = req.body;
+    for (let result in results) {
+     // db.query(`INSERT INTO users_choices (user_id, rank) VALUES ($1, $2) WHERE users_choices.choice_id = choices.id`, []);
+      db.query(`UPDATE choices SET total_points = total_points + $1 WHERE poll_id = $2 and choices.title = $3`, [results[result], req.params.survey_id, result]);
+    }
     db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
       .then(data => {
         const sender = data.rows[0].email;
@@ -94,7 +97,7 @@ module.exports = (db) => {
         // mg.messages().send(message, function (error, body) {
         //   console.log(body);
         //   console.log(error);
-        // });
+        // })
       })
       .catch(err => {
         res
