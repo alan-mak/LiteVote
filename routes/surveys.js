@@ -3,7 +3,13 @@ const express = require('express');
 const router  = express.Router();
 
 
-// const mailgun = require("mailgun-js");
+
+
+
+
+
+
+
 
 
 
@@ -11,20 +17,6 @@ const mailgun = require("mailgun-js")
 
 
 
-
-
-
-const mailgun = require("mailgun-js")
-
-
-
-//Sample Email for testing
-const data = {
-	from: "connor.mackay@gmail.com",
-	to: "alanmak95@gmail.com",
-	subject: "Hello",
-	text: "go bite a smelly pumpkin"
-};
 
 
 let generateRandomString = require('../public/scripts/generateString.js')
@@ -49,7 +41,19 @@ router.get("/new", (req, res) => {
 })
 
 router.post("/new", (req, res) => {
+  const sender = req.body.email;
+  const data = {
+    from: `${sender}`,
+    to: "connor.mackay@gmail.com",
+    subject: "Hello",
+    text: "go bite a smelly pumpkin"
+  };
 
+  //MailGun logic Commented out until account is unlocked
+  //     mg.messages().send(data, function (error, body) {
+  //   console.log(body);
+  //   console.log(error);
+  // });
   // let id = generateRandomString();
   // console.log(id)
   db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
@@ -69,10 +73,7 @@ router.post("/new", (req, res) => {
 
   });
 
-  //   mg.messages().send(data, function (error, body) {
-  //   console.log(body);
-  //   console.log(error);
-  // });
+
 });
 
 router.get("/:survey_id", (req, res) => {
