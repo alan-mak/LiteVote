@@ -26,17 +26,7 @@ router.get("/new", (req, res) => {
 })
 
 router.post("/new", (req, res) => {
-  const data = {
-    from: "connor.mackay@gmail.com",
-    to: "alanmak95@gmail.com",
-    subject: "Hello",
-    text: `Your survey ${req.body.poll} has been created! access it here! `
-  };
-    mg.messages().send(data, function (error, body) {
-    console.log(body);
-    console.log(error);
-  });
-
+  console.log(req.body);
   // let id = generateRandomString();
   // console.log(id)
   db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
@@ -46,7 +36,19 @@ router.post("/new", (req, res) => {
     VALUES ($1, $2, $3);`, [req.body.poll, req.body.option.length, res.rows[0].id])
     .then(res=>{
       console.log("inserted data into polls",res);
-    });
+    })
+    .then(result => {
+      const data = {
+        from: `${req.body.email}`,
+        to: "alanmak95@gmail.com",
+        subject: "Hello",
+        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${result}`
+      };
+      //   mg.messages().send(data, function (error, body) {
+      //   console.log(body);
+      //   console.log(error);
+      // });
+    })
   }).catch(err => {
     res
       .status(500)
@@ -75,16 +77,17 @@ router.get("/:survey_id", (req, res) => {
 });
 
 router.post("/:survey_id", (req, res) => {
+  console.log(req.body);
   const data = {
     from: "connor.mackay@gmail.com",
     to: "alanmak95@gmail.com",
     subject: "Hello",
-    text: `Someone has completed you're survey. Check their results here! ${adminlinkgoeshere}`
+    text: `Someone has completed you're survey. Check their results here! http://localhost:8080/`
   }
-  mg.messages().send(data, function (error, body) {
-    console.log(body);
-    console.log(error);
-  });
+  // mg.messages().send(data, function (error, body) {
+  //   console.log(body);
+  //   console.log(error);
+  // });
 });
 
 router.get("/:survey_id/results", (req, res) => {
