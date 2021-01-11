@@ -12,6 +12,7 @@ main {
     border-width: thin;
     border-radius: 1em;
     width: inherit;
+    margin-bottom: 60px;
     div {
       display: flex;
       flex-direction: column;
@@ -21,6 +22,12 @@ main {
 }
 h1 {
   text-align: center;
+}
+.btn {
+  margin: 5px;
+}
+.btn-sucess {
+  margin-bottom: 40px;
 }
 
 
