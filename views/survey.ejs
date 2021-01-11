@@ -30,10 +30,12 @@
             <% for (let entry of survey)  { %>
                <h3><%= entry.choices_title %></h3>
                <p><%= entry.description %></p>
+
                <input type="dropdown" class="drop-menu btn btn-primary dropdown-toggle">
             <% } %>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>
+
           </form>
           </div>
         </section>
