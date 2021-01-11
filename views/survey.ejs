@@ -19,23 +19,27 @@
   <%- include ./partials/_header.ejs %>
     <main>
       <h1>Survey</h1>
-      <div>
+      <div class="poll_title">
         <h2><%= survey[0].title %></h2>
+        <h4>Rank from lowest to highest</h4>
       </div>
       <div class="container">
         <section id=optionContainer>
-          <h2>Rank</h2>
           <div>
-            <form>
-            <% for (let entry of survey)  { %>
+            <form class="option">
+              <% for (let entry of survey) { %>
                <h3><%= entry.choices_title %></h3>
                <p><%= entry.description %></p>
-
-               <input type="dropdown" class="drop-menu btn btn-primary dropdown-toggle">
+              <select>
+                <% for (let index in survey) {%>
+               <option class="drop-menu btn btn-primary dropdown-toggle">
+                <%= parseInt(index) + 1%>
+               </option>
+               <%} %>
+              </select>
             <% } %>
             <br>
             <button type="submit" class="btn btn-success">Submit</button>
-
           </form>
           </div>
         </section>
