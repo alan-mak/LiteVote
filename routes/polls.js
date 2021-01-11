@@ -43,7 +43,7 @@ router.post("/new", (req, res) => {
         from: `${req.body.email}`,
         to: "alanmak95@gmail.com",
         subject: "Hello",
-        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}`
+        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}. View results at http://localhost:8080/${res.rows[0].id}/results`
       };
       //   mg.messages().send(data, function (error, body) {
       //   console.log(body);
@@ -78,17 +78,25 @@ router.get("/:survey_id", (req, res) => {
 });
 
 router.post("/:survey_id", (req, res) => {
-  console.log(req);
-  const data = {
-    from: "connor.mackay@gmail.com",
-    to: "alanmak95@gmail.com",
-    subject: "Hello",
-    text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
-  }
-  // mg.messages().send(data, function (error, body) {
-  //   console.log(body);
-  //   console.log(error);
-  // });
+  db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
+  .then(data => {
+    const sender = data.rows[0].email;
+    const message = {
+      from: `${sender}`,
+      to: "alanmak95@gmail.com",
+      subject: "Hello",
+      text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
+    }
+    // mg.messages().send(message, function (error, body) {
+    //   console.log(body);
+    //   console.log(error);
+    // });
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
 });
 
 router.get("/:survey_id/results", (req, res) => {
