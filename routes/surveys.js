@@ -3,6 +3,7 @@ const express = require('express');
 const router  = express.Router();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // const mailgun = require("mailgun-js");
 
 
@@ -13,6 +14,11 @@ const mailgun = require("mailgun-js")
 
 
 
+=======
+const mailgun = require("mailgun-js")
+
+
+>>>>>>> eeac5d19c59ec2750598d2be8d158ef1468b7c47
 //Sample Email for testing
 const data = {
 	from: "connor.mackay@gmail.com",
