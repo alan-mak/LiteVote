@@ -10,11 +10,12 @@ body {
   }
   #results {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-around;
     ol {
       li {
         padding: 20px;
+        list-style-type: none;
       }
     }
   }
