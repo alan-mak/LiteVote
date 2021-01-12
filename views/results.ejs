@@ -3,7 +3,8 @@
 
 <head>
   <title>Decision Maker Results Page</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
@@ -19,17 +20,17 @@
   <%- include ./partials/_header.ejs %>
 
     <h1>Results</h1>
-    <h2><%= results[0].poll %> </h2>
-    <div>
-      <div id="chart">This will be a chart</div>
-      <div id="results">
-        <ol>
-          <% for (let result of results) { %>
-          <li><%= result.title %></li>
-          <!-- <li><%= results.total_points %></li> -->
+    <h2>
+      <%= results[0].poll %>
+    </h2>
+    <div id="results">
+      <ol>
+        <% for (let result of results) { %>
+          <li>
+            <%= result.title %>
+          </li>
           <% } %>
-        </ol>
-      </div>
+      </ol>
     </div>
 </body>
 <%- include ./partials/_footer.ejs %>

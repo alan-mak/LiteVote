@@ -1,25 +1,21 @@
 $middle: center;
 
 body {
+  h1 {
+    text-align: $middle;
+  }
   h2 {
     display: flex;
     justify-content: $middle;
   }
-  div {
+  #results {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-  }
-}
-h1 {
-  text-align: center;
-}
-
-#results {
-  ol {
-    li {
-      padding: 20px;
+    ol {
+      li {
+        padding: 20px;
+      }
     }
   }
-
 }
