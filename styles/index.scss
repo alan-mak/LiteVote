@@ -1,5 +1,14 @@
 $middle: center;
 
+.creator-message {
+  margin-bottom: 100px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  max-width: 90vw;
+  margin: auto;
+}
 main{
   section {
   display: flex;
@@ -31,6 +40,7 @@ h5 {
 .instructor-img {
   max-width: 10vw;
   height: auto;
+  border-radius: 15px 50px 30px
 }
 
 #instructor-comments {
@@ -51,7 +61,17 @@ h5 {
   border: 2px solid black;
   padding: 15px;
 }
+#wayne {
+  margin-left: 10px;
+}
 
+#michael {
+  margin-left: 20px;
+}
+
+#alan {
+  margin-left: 30px;
+}
 @media only screen and (max-width: 600px) {
   #instructor-comments {
     flex-direction: column;
@@ -64,6 +84,9 @@ h5 {
   }
   #intro {
     max-width: 60vw;
+  }
+  .creator-message {
+    flex-direction: column;
   }
 }
 
