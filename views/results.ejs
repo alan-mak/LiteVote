@@ -24,16 +24,18 @@
       <%= results[0].poll %>
     </h2>
     <div id="results">
-      <ol>
+
         <% for (let result of results) { %>
+          <ol>
           <li>
-            <%= result.title %>
+           <strong> <%= result.title %> </strong>
           </li>
           <li>
            Total Points: <%= result.total_points %>
           </li>
+        </ol>
           <% } %>
-      </ol>
+
     </div>
 </body>
 <%- include ./partials/_footer.ejs %>
