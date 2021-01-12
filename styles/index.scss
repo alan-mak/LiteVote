@@ -39,6 +39,7 @@ h5 {
   justify-content: space-around;
   max-width: 80vw;
   margin: auto;
+  margin-bottom: 60px;
 }
 
 #intro {
@@ -51,5 +52,19 @@ h5 {
   padding: 15px;
 }
 
+@media only screen and (max-width: 600px) {
+  #instructor-comments {
+    flex-direction: column;
+  }
+  .img-wrapper {
+    max-width: 30vw;
+  }
+  .instructor-img {
+    max-width: 30vw;
+  }
+  #intro {
+    max-width: 60vw;
+  }
+}
 
 
