@@ -16,13 +16,35 @@
   <body>
 
   <%- include ./partials/_header.ejs %>
-    <div><h1>Polls</h1></div>
+    <div><h1>No More Arguing!</h1></div>
+    <h3>Find the Right Answer With Democracy!</h3>
+
+      <p id="intro">Decision making in a group is terrible.
+        Half the group demands they be appeased and the other
+         half demands they don't be called upon to make demands.
+         Why even bother with a show of hands? LiteVote takes all
+          concerns about social dynamic out of decision making!
+          Simply create a poll, send the link to your friends and
+           let sweet, sweet computerized democracy do all the work! </p>
+
+    <h4>Even Lighthouse Instructors love our app!</h4>
+    <h5><strong>We asked:</strong> What is the most important resource as a Lighthouse Teacher?</h5>
+    <div id="instructor-comments">
+      <div class="img-wrapper">
+    <img class="instructor-img" src="https://media-exp1.licdn.com/dms/image/C5603AQE5pPm8XJYQ0w/profile-displayphoto-shrink_200_200/0/1516241991107?e=1616025600&v=beta&t=tVzEW57rUom5ilnF8-zKLnNgL_AiZpHqcDQc616ftCQ" alt="Dominic">
+    <p>"www.slido.com! It's an obvious choice!" Dominic Tremblay</p>
+  </div>
+  <div class="img-wrapper">
+    <img class="instructor-img" src="https://www.lighthouselabs.ca/uploads/team_member/avatar/291/medium_P1050464.jpg" alt="Francis">
+    <p>"Check out my naan bread!" Francis Bourgouin</p>
+  </div>
+    <div class="img-wrapper">
+    <img class="instructor-img" src="https://media-exp1.licdn.com/dms/image/C4D03AQHxjB7jkJlvtw/profile-displayphoto-shrink_200_200/0/1517821439697?e=1616025600&v=beta&t=SdipJMgv9x6qeB8K28dqYI0PdoKPPtLrXLMJ5xWe3NA" alt="Vasily">
+    <p>"r/prequelmemes" Vasily Klimkin</p>
+  </div>
+  </div>
     <main class="previousContainer">
       <section>
-        <% for (let poll of polls) { %>
-        <h4><%= poll.title %></h4>
-        <% } %>
-        <p class="content">The group has decided to go here.</p>
       </section>
     </main>
   </body>

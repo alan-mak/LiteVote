@@ -29,7 +29,6 @@ module.exports = (db) => {
 
   router.post("/new", (req, res) => {
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
-<
     .then(data=>{
       return db.query(`INSERT INTO polls (title, num_choices, admin_id)
       VALUES ($1, $2, $3)
@@ -44,14 +43,14 @@ module.exports = (db) => {
     .then(result => {
       const data = {
         from: `${req.body.email}`,
-        to: "alanmak95@gmail.com",
+        to: "connor.mackay@gmail.com",
         subject: "Hello",
         text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}. View results at http://localhost:8080/${res.rows[0].id}/results`
       };
-      //   mg.messages().send(data, function (error, body) {
-      //   console.log(body);
-      //   console.log(error);
-      // });
+        mg.messages().send(data, function (error, body) {
+        console.log(body);
+        console.log(error);
+      });
     })
     .catch(err => {
 
@@ -87,9 +86,8 @@ module.exports = (db) => {
     }
     db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
       .then(data => {
-        const sender = data.rows[0].email;
         const message = {
-          from: `${sender}`,
+          from: "alanmak95@gmail.com",
           to: "connor.mackay@gmail.com",
           subject: "Hello",
           text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`

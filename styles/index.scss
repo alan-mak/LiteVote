@@ -16,6 +16,38 @@ main{
     }
   }
 }
-h1 {
+h1, h3, h4, h5 {
   text-align: center;
 }
+
+h5 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.img-wrapper {
+  max-width: 12vw;
+}
+.instructor-img {
+  max-width: 10vw;
+  height: auto;
+}
+
+#instructor-comments {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#intro {
+  text-align: center;
+  max-width: 50vw;
+  margin: auto;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  border: 2px solid black;
+  padding: 15px;
+}
+
+
+
