@@ -27,9 +27,6 @@ module.exports = (db) => {
   });
 
   router.post("/new", (req, res) => {
-    console.log(req.body);
-    // let id = generateRandomString();
-    // console.log(id)
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
     .then(data=>{
       return db.query(`INSERT INTO polls (title, num_choices, admin_id)
@@ -37,7 +34,6 @@ module.exports = (db) => {
       RETURNING *;`, [req.body.poll, req.body.option.length, data.rows[0].id])
     })
     .then(data=>{
-      console.log("DATA", data.rows)
       for (let index in req.body.option) {
         db.query('INSERT INTO choices (poll_id, title, description) VALUES ($1, $2, $3);', [data.rows[0].id, req.body.option[index], req.body.option_description[index]])
       }
