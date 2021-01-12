@@ -20,7 +20,6 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
-
   });
 
   router.get("/new", (req, res) => {
@@ -32,36 +31,35 @@ module.exports = (db) => {
     // let id = generateRandomString();
     // console.log(id)
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
-      .then(data=>{
-        console.log("Inserted data into Users ",data.rows[0].id);
-        db.query(`INSERT INTO polls (title, num_choices, admin_id)
-    VALUES ($1, $2, $3);`, [req.body.poll, req.body.option.length, data.rows[0].id])
-          .then(data=>{
-            console.log("inserted data into polls",data);
-            res.redirect('/')
-          })
-          .then(result => {
-            const data = {
-              from: `${req.body.email}`,
-              to: "alanmak95@gmail.com",
-              subject: "Hello",
-              text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}. View results at http://localhost:8080/${res.rows[0].id}/results`
-            };
-            //   mg.messages().send(data, function (error, body) {
-            //   console.log(body);
-            //   console.log(error);
-            // });
-          });
-      }).catch(err => {
+    .then(data=>{
+      return db.query(`INSERT INTO polls (title, num_choices, admin_id)
+      VALUES ($1, $2, $3)
+      RETURNING *;`, [req.body.poll, req.body.option.length, data.rows[0].id])
+    })
+    .then(data=>{
+      console.log("DATA", data.rows)
+      for (let index in req.body.option) {
+        db.query('INSERT INTO choices (poll_id, title, description) VALUES ($1, $2, $3);', [data.rows[0].id, req.body.option[index], req.body.option_description[index]])
+      }
+      res.redirect('/')
+    })
+    .then(result => {
+      const data = {
+        from: `${req.body.email}`,
+        to: "alanmak95@gmail.com",
+        subject: "Hello",
+        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}. View results at http://localhost:8080/${res.rows[0].id}/results`
+      };
+      //   mg.messages().send(data, function (error, body) {
+      //   console.log(body);
+      //   console.log(error);
+      // });
+    })
+    .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
-
-
-
-      });
-
-
+    });
   });
 
   router.get("/:survey_id", (req, res) => {
