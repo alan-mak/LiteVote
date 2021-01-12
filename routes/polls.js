@@ -28,32 +28,30 @@ module.exports = (db) => {
   });
 
   router.post("/new", (req, res) => {
-    db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
+   return db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
     .then(data=>{
+      console.log(data.rows);
       return db.query(`INSERT INTO polls (title, num_choices, admin_id)
       VALUES ($1, $2, $3)
-      RETURNING *;`, [req.body.poll, req.body.option.length, data.rows[0].id])
+      RETURNING *;`, [req.body.poll, req.body.option.length, data.rows.id])
     })
     .then(data=>{
       for (let index in req.body.option) {
         db.query('INSERT INTO choices (poll_id, title, description) VALUES ($1, $2, $3);', [data.rows[0].id, req.body.option[index], req.body.option_description[index]])
       }
-      res.redirect('/')
-    })
-    .then(result => {
-      const data = {
+      const message = {
         from: `${req.body.email}`,
         to: "connor.mackay@gmail.com",
         subject: "Hello",
-        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}. View results at http://localhost:8080/${res.rows[0].id}/results`
+        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${data.rows[0].id}. View results at http://localhost:8080/${data.rows[0].id}/results`
       };
-        mg.messages().send(data, function (error, body) {
+        mg.messages().send(message, function (error, body) {
         console.log(body);
         console.log(error);
       });
+      res.redirect('/')
     })
     .catch(err => {
-
         res
           .status(500)
           .json({ error: err.message });
@@ -97,7 +95,7 @@ module.exports = (db) => {
           console.log(body);
           console.log(error);
         })
-
+        res.redirect('/')
       })
       .catch(err => {
         res
