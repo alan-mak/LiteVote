@@ -6,6 +6,7 @@ const mailgun = require("mailgun-js")
 
 
 
+
 let generateRandomString = require('../public/scripts/generateString.js');
 
 module.exports = (db) => {
@@ -32,12 +33,13 @@ module.exports = (db) => {
     // let id = generateRandomString();
     // console.log(id)
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
-      .then(res=>{
-        console.log("Inserted data into Users ",res.rows[0].id);
+      .then(data=>{
+        console.log("Inserted data into Users ",data.rows[0].id);
         db.query(`INSERT INTO polls (title, num_choices, admin_id)
-    VALUES ($1, $2, $3);`, [req.body.poll, req.body.option.length, res.rows[0].id])
-          .then(res=>{
-            console.log("inserted data into polls",res);
+    VALUES ($1, $2, $3);`, [req.body.poll, req.body.option.length, data.rows[0].id])
+          .then(data=>{
+            console.log("inserted data into polls",data);
+            res.redirect('/')
           })
           .then(result => {
             const data = {
@@ -71,7 +73,7 @@ module.exports = (db) => {
         const survey = data.rows;
 
         (survey);
-        res.render("survey", { survey });
+        res.render("survey", { survey, survey_id });
       })
       .catch(err => {
         res
@@ -81,6 +83,11 @@ module.exports = (db) => {
   });
 
   router.post("/:survey_id", (req, res) => {
+    const results = req.body;
+    for (let result in results) {
+     // db.query(`INSERT INTO users_choices (user_id, rank) VALUES ($1, $2) WHERE users_choices.choice_id = choices.id`, []);
+      db.query(`UPDATE choices SET total_points = total_points + $1 WHERE poll_id = $2 and choices.title = $3`, [results[result], req.params.survey_id, result]);
+    }
     db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
       .then(data => {
         const sender = data.rows[0].email;
@@ -90,10 +97,12 @@ module.exports = (db) => {
           subject: "Hello",
           text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
         };
+
         mg.messages().send(message, function (error, body) {
           console.log(body);
           console.log(error);
         })
+
       })
       .catch(err => {
         res
