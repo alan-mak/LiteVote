@@ -2,12 +2,13 @@
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
-const mailgun = require("mailgun-js")
+// const mailgun = require("mailgun-js")
 
 
 
 
 let generateRandomString = require('../public/scripts/generateString.js');
+let check_duplicate = require('../public/scripts/checkDuplicate.js')
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
@@ -28,7 +29,10 @@ module.exports = (db) => {
   });
 
   router.post("/new", (req, res) => {
-   return db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
+
+    db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
+
+ 
     .then(data=>{
       console.log(data.rows);
       return db.query(`INSERT INTO polls (title, num_choices, admin_id)
@@ -78,31 +82,41 @@ module.exports = (db) => {
 
   router.post("/:survey_id", (req, res) => {
     const results = req.body;
-    for (let result in results) {
-     // db.query(`INSERT INTO users_choices (user_id, rank) VALUES ($1, $2) WHERE users_choices.choice_id = choices.id`, []);
-      db.query(`UPDATE choices SET total_points = total_points + $1 WHERE poll_id = $2 and choices.title = $3`, [results[result], req.params.survey_id, result]);
-    }
-    db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
-      .then(data => {
-        const message = {
-          from: "alanmak95@gmail.com",
-          to: "connor.mackay@gmail.com",
-          subject: "Hello",
-          text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
-        };
 
-        mg.messages().send(message, function (error, body) {
-          console.log(body);
-          console.log(error);
+    if (check_duplicate(results)) {
+      // alert("THere are duplicates")
+      res.send("DUPLICATES")
+    } else {
+      for (let result in results) {
+       // db.query(`INSERT INTO users_choices (user_id, rank) VALUES ($1, $2) WHERE users_choices.choice_id = choices.id`, []);
+        db.query(`UPDATE choices SET total_points = total_points + $1 WHERE poll_id = $2 and choices.title = $3`, [results[result], req.params.survey_id, result]);
+      }
+      db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
+        .then(data => {
+          const sender = data.rows[0].email;
+          const message = {
+            from: `${sender}`,
+            to: "connor.mackay@gmail.com",
+            subject: "Hello",
+            text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
+          };
+
+        // mg.messages().send(message, function (error, body) {
+        //   console.log(body);
+        //   console.log(error);
+        // })
+         res.redirect('/')
         })
-        res.redirect('/')
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
+        .catch(err => {
+          res
+            .status(500)
+            .json({ error: err.message });
+        });
+  }});
+
+
+    
+
 
   router.get("/:survey_id/results", (req, res) => {
     const survey_id = req.params.survey_id;
