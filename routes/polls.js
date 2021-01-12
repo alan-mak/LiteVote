@@ -1,8 +1,10 @@
 
 const express = require('express');
+const { ClientBase } = require('pg');
 const router  = express.Router();
+const mailgun = require("mailgun-js")
 
-const mailgun = require("mailgun-js");
+
 
 let generateRandomString = require('../public/scripts/generateString.js');
 
@@ -38,17 +40,15 @@ module.exports = (db) => {
             console.log("inserted data into polls",res);
           })
           .then(result => {
-            console.log("POLLID IS HERE!: ", res.rows[0].id);
             const data = {
               from: `${req.body.email}`,
-              to: "alanmak95@gmail.com",
+              to: "connor.mackay@gmail.com",
               subject: "Hello",
               text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${res.rows[0].id}. View results at http://localhost:8080/${res.rows[0].id}/results`
             };
-            //   mg.messages().send(data, function (error, body) {
-            //   console.log(body);
-            //   console.log(error);
-            // });
+              mg.messages().send(data, function (error, body) {
+              console.log("EMail sent to user: ", body);
+            });
           });
       }).catch(err => {
         res
@@ -64,9 +64,12 @@ module.exports = (db) => {
 
   router.get("/:survey_id", (req, res) => {
     const survey_id = req.params.survey_id;
-    db.query('SELECT polls.title, choices.title AS choices_title, choices.description FROM polls JOIN choices ON polls.id = choices.poll_id WHERE poll_id = $1;', [survey_id])
+    console.log(survey_id);
+    db.query('SELECT polls.title, choices.title AS choices_title, choices.description FROM polls JOIN choices ON polls.id = choices.poll_id WHERE polls.id = $1;', [survey_id])
       .then(data => {
+        console.log(data.rows);
         const survey = data.rows;
+
         (survey);
         res.render("survey", { survey });
       })
@@ -83,14 +86,14 @@ module.exports = (db) => {
         const sender = data.rows[0].email;
         const message = {
           from: `${sender}`,
-          to: "alanmak95@gmail.com",
+          to: "connor.mackay@gmail.com",
           subject: "Hello",
           text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
         };
-        // mg.messages().send(message, function (error, body) {
-        //   console.log(body);
-        //   console.log(error);
-        // });
+        mg.messages().send(message, function (error, body) {
+          console.log(body);
+          console.log(error);
+        })
       })
       .catch(err => {
         res
