@@ -7,6 +7,7 @@ $(document).ready(function() {
     for(let object of data) {
       dataArr.push(object.value)
     }
+    // Indicates a duplicate value has been selected
     if(new Set(dataArr).size !== dataArr.length) {
       $('.error').show()
       event.preventDefault();
