@@ -10,12 +10,15 @@ h2 {
   }
 
 #results {
-    max-width: 300px;
-    margin: 0 auto 50px auto;
+    // max-width: 300px;
+    margin: 5em 30em;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     ol {
+      display: flex;
+      flex-direction: column;
+      align-items: $middle;
       li {
         list-style-type: none;
       }
