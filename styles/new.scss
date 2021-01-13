@@ -21,13 +21,24 @@ form {
     }
     #option_container {
       .option_and_description{
-        margin: 1em 0;
-        flex-direction: column;
-        padding: 10px 10px 0px 10px;
+        div {
+          margin: 1em 0;
+          flex-direction: column;
+          width: 95%;
+          height: 10%;
+          textarea {
+            margin-bottom: 10px;
+          }
+        }
+        padding: 10px;
         border: 1px solid blue;
         border-radius: 5px;
-        textarea {
-          margin-bottom: 10px;
+        button {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 2em;
+          width: 2em;
         }
       }
     }
