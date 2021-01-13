@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <title>Decision Maker Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
@@ -17,7 +19,7 @@
 
   <%- include ./partials/_header.ejs %>
     <div><h1>No More Arguing!</h1></div>
-    <h3>Find the Right Answer With Democracy!</h3>
+    <h2>Find the Right Answer With Democracy!</h2>
 
       <p id="intro">Decision making in a group is terrible.
         Half the group demands they be appeased and the other
@@ -27,20 +29,37 @@
           Simply create a poll, send the link to your friends and
            let sweet, sweet computerized democracy do all the work! </p>
 
-    <h4>Even Lighthouse Instructors love our app!</h4>
+    <h2>Even Lighthouse Instructors love our app!</h2>
     <h5><strong>We asked:</strong> What is the most important resource as a Lighthouse Teacher?</h5>
     <div id="instructor-comments">
       <div class="img-wrapper">
     <img class="instructor-img" src="https://media-exp1.licdn.com/dms/image/C5603AQE5pPm8XJYQ0w/profile-displayphoto-shrink_200_200/0/1516241991107?e=1616025600&v=beta&t=tVzEW57rUom5ilnF8-zKLnNgL_AiZpHqcDQc616ftCQ" alt="Dominic">
-    <p>"www.slido.com! It's an obvious choice!" Dominic Tremblay</p>
+    <p>"www.slido.com! It's an obvious choice!" </p>
+    <p class="instructor-name">-Dominic Tremblay</p>
   </div>
   <div class="img-wrapper">
     <img class="instructor-img" src="https://www.lighthouselabs.ca/uploads/team_member/avatar/291/medium_P1050464.jpg" alt="Francis">
-    <p>"Check out my naan bread!" Francis Bourgouin</p>
+    <p>"Check out my naan bread!" </p>
+    <p class="instructor-name">-Francis Bourgouin</p>
   </div>
     <div class="img-wrapper">
     <img class="instructor-img" src="https://media-exp1.licdn.com/dms/image/C4D03AQHxjB7jkJlvtw/profile-displayphoto-shrink_200_200/0/1517821439697?e=1616025600&v=beta&t=SdipJMgv9x6qeB8K28dqYI0PdoKPPtLrXLMJ5xWe3NA" alt="Vasily">
-    <p>"r/prequelmemes" Vasily Klimkin</p>
+    <p>"r/prequelmemes"</p>
+    <p class="instructor-name">-Vasily Klimkin</p>
+  </div>
+  </div>
+  <h2>Meet the Dev Team!</h2>
+  <div class="creator-message">
+
+    <div class="alan-message">
+    <p>"You miss %100 of the shots you don't take"</p>
+    <p id="wayne">-Wayne Gretzky</p>
+    <p id="michael">--Michael Scott</p>
+    <p id="alan">---Alan Mak</p>
+  </div>
+  <div class="connor-message">
+    <p>"Another day another bug"</p>
+    <p>-Connor Mackay</p>
   </div>
   </div>
   </body>

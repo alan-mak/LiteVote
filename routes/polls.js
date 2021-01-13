@@ -1,7 +1,13 @@
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
-// const mailgun = require("mailgun-js")
+const mailgun = require("mailgun-js")
+
+
+
+
+//let generateRandomString = require('../public/scripts/generateString.js');
+let check_duplicate = require('../public/scripts/checkDuplicate.js')
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
@@ -84,6 +90,7 @@ module.exports = (db) => {
           text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
           };
 
+
     // mg.messages().send(message, function (error, body) {
     //   console.log(body);
     //   console.log(error);
@@ -96,6 +103,7 @@ module.exports = (db) => {
         .json({ error: err.message });
     });
   });
+
 
   router.get("/:survey_id/results", (req, res) => {
     const survey_id = req.params.survey_id;
