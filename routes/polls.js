@@ -1,13 +1,7 @@
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
-const mailgun = require("mailgun-js")
-
-
-
-
-//let generateRandomString = require('../public/scripts/generateString.js');
-let check_duplicate = require('../public/scripts/checkDuplicate.js')
+// const mailgun = require("mailgun-js")
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
