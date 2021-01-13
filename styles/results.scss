@@ -1,23 +1,25 @@
 $middle: center;
-
-body {
-  h1 {
+h1 {
     text-align: $middle;
   }
-  h2 {
+
+h2 {
     display: flex;
     justify-content: $middle;
   }
-  #results {
+
+#results {
+    max-width: 300px;
+    margin: 0 auto 50px auto;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-bottom: 50px;
     ol {
       li {
-        padding: 20px;
         list-style-type: none;
       }
     }
   }
-}
+
+
+
