@@ -16,6 +16,8 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/errorMessage.js"></script>
+
 </head>
 
 <body>
@@ -25,11 +27,12 @@
       <div class="poll_title">
         <h2><%= survey[0].title %></h2>
         <h4>Rank from lowest to highest</h4>
+        <p>Input your points with the lowest starting at 1 and do not repeat</p>
       </div>
       <div class="container">
         <section id=optionContainer>
           <div>
-            <p class="error"><i class="fas fa-exclamation-triangle"></i>ERROR: UNABLE TO DUPLICATE RANKING<i class="fas fa-exclamation-triangle"></i></p>
+            <h3 class="error"><i class="fas fa-exclamation-triangle"></i>ERROR: UNABLE TO DUPLICATE RANKING<i class="fas fa-exclamation-triangle"></i></h3>
             <form class="option" action="/<%= survey_id %>" method="POST">
               <% for (let entry of survey) { %>
 
