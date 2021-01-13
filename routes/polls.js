@@ -1,7 +1,7 @@
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
-const mailgun = require("mailgun-js")
+const mailgun = require("mailgun-js");
 
 
 
@@ -29,32 +29,32 @@ module.exports = (db) => {
 
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
 
-    .then(data=>{
-      return db.query(`INSERT INTO polls (title, num_choices, admin_id)
+      .then(data=>{
+        return db.query(`INSERT INTO polls (title, num_choices, admin_id)
       VALUES ($1, $2, $3)
-      RETURNING *;`, [req.body.poll, req.body.option.length, data.rows.id])
-    })
-    .then(data=>{
-      for (let index in req.body.option) {
-        db.query('INSERT INTO choices (poll_id, title, description) VALUES ($1, $2, $3);', [data.rows[0].id, req.body.option[index], req.body.option_description[index]])
-      }
-      const message = {
-        from: `${req.body.email}`,
-        to: "connor.mackay@gmail.com",
-        subject: "Hello",
-        text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${data.rows[0].id}. View results at http://localhost:8080/${data.rows[0].id}/results`
-      };
-        mg.messages().send(message, function (error, body) {
-        console.log(body);
-        console.log(error);
-      });
-      res.redirect('/:survey_id/links')
-    })
-    .catch(err => {
+      RETURNING *;`, [req.body.poll, req.body.option.length, data.rows.id]);
+      })
+      .then(data=>{
+        for (let index in req.body.option) {
+          db.query('INSERT INTO choices (poll_id, title, description) VALUES ($1, $2, $3);', [data.rows[0].id, req.body.option[index], req.body.option_description[index]]);
+        }
+        const message = {
+          from: `${req.body.email}`,
+          to: "connor.mackay@gmail.com",
+          subject: "Hello",
+          text: `Your survey ${req.body.poll} has been created! access it here! http://localhost:8080/${data.rows[0].id}. View results at http://localhost:8080/${data.rows[0].id}/results`
+        };
+        mg.messages().send(message, function(error, body) {
+          console.log(body);
+          console.log(error);
+        });
+        res.redirect('/:survey_id/links');
+      })
+      .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
-    });
+      });
   });
 
   router.get("/:survey_id", (req, res) => {
@@ -84,20 +84,23 @@ module.exports = (db) => {
           to: "connor.mackay@gmail.com",
           subject: "Hello",
           text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
-          };
+        };
 
 
-    mg.messages().send(message, function (error, body) {
-      console.log(body);
-      console.log(error);
-    })
-    res.redirect('/')
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+        mg.messages().send(message, function(error, body) {
+          if (error) {
+            console.log(error)
+          } else {
+          console.log(body);
+          }
+        });
+        res.redirect('/');
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
   });
 
 
@@ -121,7 +124,7 @@ module.exports = (db) => {
 router.get('/:survey_id/links', (req, res) => {
   const survey_id = req.params.survey_id;
   res.render("links", { survey_id });
-})
+});
 
 
 
