@@ -26,10 +26,16 @@ main {
     div {
       display: flex;
       flex-direction: column;
-      .error {
-        justify-content: center;
-        margin-top: 0.5rem;
+      .error_duplicate{
         display: none;
+        margin-top: 0.5rem;
+        justify-content: center;
+        background-color: yellow;
+      }
+      .error_missing {
+        display: none;
+        margin-top: 0.5rem;
+        justify-content: center;
         background-color: yellow;
       }
       h3 {
