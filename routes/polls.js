@@ -1,7 +1,11 @@
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
-// const mailgun = require("mailgun-js")
+const mailgun = require("mailgun-js")
+
+
+
+
 
 module.exports = (db) => {
   router.get('/', (req, res) => {
@@ -25,9 +29,7 @@ module.exports = (db) => {
 
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
 
-
     .then(data=>{
-      console.log(data.rows);
       return db.query(`INSERT INTO polls (title, num_choices, admin_id)
       VALUES ($1, $2, $3)
       RETURNING *;`, [req.body.poll, req.body.option.length, data.rows.id])
@@ -46,7 +48,7 @@ module.exports = (db) => {
         console.log(body);
         console.log(error);
       });
-      res.redirect('/')
+      res.redirect('/:survey_id/links')
     })
     .catch(err => {
         res
@@ -85,10 +87,10 @@ module.exports = (db) => {
           };
 
 
-    // mg.messages().send(message, function (error, body) {
-    //   console.log(body);
-    //   console.log(error);
-    // })
+    mg.messages().send(message, function (error, body) {
+      console.log(body);
+      console.log(error);
+    })
     res.redirect('/')
     })
     .catch(err => {
@@ -101,7 +103,7 @@ module.exports = (db) => {
 
   router.get("/:survey_id/results", (req, res) => {
     const survey_id = req.params.survey_id;
-    db.query('SELECT polls.title AS poll, choices.title, choices.total_points FROM polls JOIN choices on polls.id = choices.poll_id WHERE poll_id = $1 ORDER BY choices.total_points DESC;', [survey_id])
+    db.query('SELECT polls.title AS poll, choices.title, choices.total_points FROM polls JOIN choices on polls.id = choices.poll_id WHERE poll_id = $1 ORDER BY choices.total_points DESC;', [escape(survey_id)])
       .then(data => {
         const results = data.rows;
         console.log(results);
@@ -115,6 +117,11 @@ module.exports = (db) => {
   });
   return router;
 };
+
+router.get('/:survey_id/links', (req, res) => {
+  const survey_id = req.params.survey_id;
+  res.render("links", { survey_id });
+})
 
 
 
