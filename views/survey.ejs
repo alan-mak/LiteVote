@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/styles/survey.css" type="text/css" />
   <link rel="stylesheet" href="/styles/_header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/_footer.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -28,12 +29,12 @@
       <div class="container">
         <section id=optionContainer>
           <div>
-
+            <p class="error"><i class="fas fa-exclamation-triangle"></i>ERROR: UNABLE TO DUPLICATE RANKING<i class="fas fa-exclamation-triangle"></i></p>
             <form class="option" action="/<%= survey_id %>" method="POST">
               <% for (let entry of survey) { %>
 
                <h3><%= entry.choices_title %></h3>
-               <p><%= entry.description %></p>
+               <p class="description"><%= entry.description %></p>
                <input type="number" min="1" max="<%=parseInt(survey.length) %>" class="drop-menu btn btn-primary dropdown-toggle" name="<%= entry.choices_title %>" id="<%= entry.choices_title %>">
             <% } %>
             <br>
