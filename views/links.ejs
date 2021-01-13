@@ -2,48 +2,32 @@
 <html lang="en">
 
 <head>
-  <title>Decision Maker New Poll Page</title>
+  <title>Decision Maker Links Page</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/new.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/links.css" type="text/css" />
   <link rel="stylesheet" href="/styles/_header.css" type="text/css" />
   <link rel="stylesheet" href="/styles/_footer.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/newOptions.js"></script>
-  <script type="text/javascript" src="/scripts/deleteOptions.js"></script>
   <script type="text/javascript" src="scripts/mailgun.js"></script>
 </head>
 
 <body>
   <%- include ./partials/_header.ejs %>
-    <h1>New Poll</h1>
-    <!-- Need to add where it is posting to with action -->
-    <form method="POST">
-      <div>
-        <label for="name">Creator Name</label>
-        <input type="name" name="name" id="creator_name" placeholder="eg. Michael Scott"></input>
-      </div>
-      <div>
-        <label for="email">Creator Email</label>
-        <input type="email" name="email" id="creator_email" placeholder="eg. mscott@dundermifflin.com"></input>
-      </div>
-      <div>
-        <label for="poll">Poll</label>
-        <input type="text" name="poll" id="poll_name" placeholder="eg. Where should we go eat?"></input>
-      </div>
-      <div>
-        <button type="button" class="add btn btn-primary">Add Option</button>
-        <button type="submit" class="submit btn btn-primary">Submit</button>
-      </div>
-      <section id="option_container"></section>
-    </form>
+  <h1>Congratulations! Your New Poll has been Created!</h1>
+  <div class="links">
+  <ol>
+    <li><a href="http://localhost:8080/<%= survey_id %>">Share your Poll with Friends!</a></li>
+    <li><a href="http://localhost:8080/<%= survey_id %>/results">View the results!</a></li>
+  </div>
+  </ol>
 </body>
-<%- include ./partials/_footer.ejs %>
-
-</html>
+  <%- include ./partials/_footer.ejs %>
+  </html>
