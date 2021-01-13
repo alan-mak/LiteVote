@@ -15,6 +15,7 @@ main {
   }
   #optionContainer {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     border: solid;
     border-width: thin;
@@ -25,8 +26,14 @@ main {
     div {
       display: flex;
       flex-direction: column;
-      select {
-        margin-bottom: 1em;
+      .error {
+        display: none;
+      }
+      h3 {
+        margin-top: 1.5rem;
+      }
+      .description {
+        margin: 1em 0;
       }
     }
   }

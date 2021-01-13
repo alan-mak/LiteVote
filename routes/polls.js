@@ -1,13 +1,9 @@
-
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
 // const mailgun = require("mailgun-js")
 
 
-
-
-let generateRandomString = require('../public/scripts/generateString.js');
 let check_duplicate = require('../public/scripts/checkDuplicate.js')
 
 module.exports = (db) => {
@@ -32,7 +28,7 @@ module.exports = (db) => {
 
     db.query('INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id;', [req.body.name, req.body.email])
 
- 
+
     .then(data=>{
       console.log(data.rows);
       return db.query(`INSERT INTO polls (title, num_choices, admin_id)
@@ -84,7 +80,6 @@ module.exports = (db) => {
     const results = req.body;
 
     if (check_duplicate(results)) {
-      // alert("THere are duplicates")
       res.send("DUPLICATES")
     } else {
       for (let result in results) {
@@ -115,7 +110,7 @@ module.exports = (db) => {
   }});
 
 
-    
+
 
 
   router.get("/:survey_id/results", (req, res) => {
