@@ -9,7 +9,7 @@ $(document).ready(function() {
     }
     // Indicates a duplicate value has been selected
     if(new Set(dataArr).size !== dataArr.length) {
-      $('.error').show()
+      $('.error').css('display', 'flex')
       event.preventDefault();
     }
   })
