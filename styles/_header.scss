@@ -18,8 +18,11 @@ $background-color: #5FA9B3;
     list-style-type: none;
     padding: 20px;
     margin-right: 5px;
+    a {
+      font-size: 2em;
+    }
     p {
-      font-size: 25px;
+      font-size: 2em;
     }
     a:hover {
       border: 1px solid black;
