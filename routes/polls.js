@@ -60,13 +60,9 @@ module.exports = (db) => {
 
   router.get("/:survey_id", (req, res) => {
     const survey_id = req.params.survey_id;
-    console.log(survey_id);
     db.query('SELECT polls.title, choices.title AS choices_title, choices.description FROM polls JOIN choices ON polls.id = choices.poll_id WHERE polls.id = $1;', [survey_id])
       .then(data => {
-        console.log(data.rows);
         const survey = data.rows;
-
-        (survey);
         res.render("survey", { survey, survey_id });
       })
       .catch(err => {
@@ -78,40 +74,31 @@ module.exports = (db) => {
 
   router.post("/:survey_id", (req, res) => {
     const results = req.body;
-
-    if (check_duplicate(results)) {
-      res.send("DUPLICATES")
-    } else {
-      for (let result in results) {
-       // db.query(`INSERT INTO users_choices (user_id, rank) VALUES ($1, $2) WHERE users_choices.choice_id = choices.id`, []);
-        db.query(`UPDATE choices SET total_points = total_points + $1 WHERE poll_id = $2 and choices.title = $3`, [results[result], req.params.survey_id, result]);
-      }
-      db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
-        .then(data => {
-          const sender = data.rows[0].email;
-          const message = {
-            from: `${sender}`,
-            to: "connor.mackay@gmail.com",
-            subject: "Hello",
-            text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
+    for (let result in results) {
+      db.query(`UPDATE choices SET total_points = total_points + $1 WHERE poll_id = $2 and choices.title = $3`, [results[result], req.params.survey_id, result]);
+    }
+    db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
+      .then(data => {
+        const sender = data.rows[0].email;
+        const message = {
+          from: `${sender}`,
+          to: "connor.mackay@gmail.com",
+          subject: "Hello",
+          text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
           };
 
-        // mg.messages().send(message, function (error, body) {
-        //   console.log(body);
-        //   console.log(error);
-        // })
-         res.redirect('/')
-        })
-        .catch(err => {
-          res
-            .status(500)
-            .json({ error: err.message });
-        });
-  }});
-
-
-
-
+    // mg.messages().send(message, function (error, body) {
+    //   console.log(body);
+    //   console.log(error);
+    // })
+    res.redirect('/')
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
 
   router.get("/:survey_id/results", (req, res) => {
     const survey_id = req.params.survey_id;
