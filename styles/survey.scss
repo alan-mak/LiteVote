@@ -29,8 +29,15 @@ main {
       .error {
         justify-content: center;
         margin-top: 0.5rem;
-        display: none;
         background-color: yellow;
+        .error_duplicate {
+          display: none;
+          justify-content: center;
+        }
+        .error_missing {
+          display: none;
+          justify-content: center;
+        }
       }
       h3 {
         margin-top: 2rem;
@@ -43,7 +50,7 @@ main {
 }
 
 .btn {
-  // margin: 5px 0;
+  margin: 5px 0;
 }
 .btn-sucess {
   margin-bottom: 40px;
