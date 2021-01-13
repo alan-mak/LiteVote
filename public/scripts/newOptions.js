@@ -10,7 +10,13 @@ $(document).ready(function (){
   $add.click(function (){
     $('#option_container').append(text);
     $('.delete').click(function() {
-      $('#option_container').remove()
+      let description = $(this).prev();
+      let title = description.prev();
+      let box = title.parent();
+      box.remove();
+      title.remove();
+      description.remove();
+      $(this).remove();
     })
   })
 });
