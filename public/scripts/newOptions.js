@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
   let text =
     `<div class=option_and_description>
       <div>
@@ -9,7 +9,7 @@ $(document).ready(function () {
     </div>`;
 
   let $add = $('.add');
-  $add.click(function () {
+  $add.click(function() {
     $('#option_container').append(text);
     $('.delete').click(function() {
       let option = $(this).prev();
@@ -18,6 +18,6 @@ $(document).ready(function () {
       box.remove();
       option.remove();
       $(this).remove();
-    })
-  })
+    });
+  });
 });

@@ -1,6 +1,8 @@
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
+
+// Need mailgun credentals for site to win
 // const mailgun = require("mailgun-js");
 
 module.exports = (db) => {
@@ -75,7 +77,7 @@ module.exports = (db) => {
     }
     db.query(`SELECT users.email FROM  users JOIN polls on admin_id = users.id WHERE admin_id = ${req.params.survey_id}`)
       .then(data => {
-        const sender = data.rows[0].email;
+        const sender = "connor.mackay@gmail.com";
         const message = {
           from: `${sender}`,
           to: "connor.mackay@gmail.com",
@@ -86,9 +88,9 @@ module.exports = (db) => {
 
         mg.messages().send(message, function(error, body) {
           if (error) {
-            console.log(error)
+            console.log(error);
           } else {
-          console.log(body);
+            console.log(body);
           }
         });
         res.redirect('/');

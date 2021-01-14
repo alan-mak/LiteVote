@@ -3,5 +3,6 @@ public/styles
 .env
 *.log
 *.sqlite3
-mailgun.js
+public/scripts/mailgun.js
 .DS_Store
+app.js
