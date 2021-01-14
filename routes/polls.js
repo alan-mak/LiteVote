@@ -5,6 +5,7 @@ const router  = express.Router();
 // Need mailgun credentals for site to win
 // const mailgun = require("mailgun-js");
 
+
 module.exports = (db) => {
   router.get('/', (req, res) => {
     db.query('SELECT polls.title FROM polls;')
@@ -72,6 +73,7 @@ module.exports = (db) => {
 
   router.post("/:survey_id", (req, res) => {
     const results = req.body;
+    const name = req.body.name;
     for (let result in results) {
       db.query(`UPDATE choices SET total_points = total_points + $1 WHERE poll_id = $2 and choices.title = $3`, [results[result], req.params.survey_id, result]);
     }
@@ -82,7 +84,7 @@ module.exports = (db) => {
           from: `${sender}`,
           to: "connor.mackay@gmail.com",
           subject: "Hello",
-          text: `Someone has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
+          text: `${name} has completed you're survey. Check their results here! http://localhost:8080/${req.originalUrl}/results. Take the survey yourself here! http://localhost:8080/${req.originalUrl}`
         };
 
 

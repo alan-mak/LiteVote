@@ -42,6 +42,7 @@
                   class="fas fa-exclamation-triangle"></i></h3>
             </div>
             <form class="option" action="/<%= survey_id %>" method="POST">
+              <input type="text" name="name" placeholder="Please enter your name">
               <% for (let entry of survey) { %>
                 <h3>
                   <%= entry.choices_title %>
