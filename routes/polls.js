@@ -1,11 +1,7 @@
 const express = require('express');
 const { ClientBase } = require('pg');
 const router  = express.Router();
-const mailgun = require("mailgun-js");
-
-
-
-
+// const mailgun = require("mailgun-js");
 
 module.exports = (db) => {
   router.get('/', (req, res) => {

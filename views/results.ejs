@@ -22,23 +22,25 @@
 
 <body>
   <%- include ./partials/_header.ejs %>
-
     <h1>Results</h1>
-    <h2>
-      <%= results[0].poll %>
-    </h2>
+    <h2><u>
+        <%= results[0].poll %>
+      </u></h2>
     <div id="results">
-
-        <% for (let result of results) { %>
-          <ol>
+      <% for (let result of results) { %>
+        <ol>
           <li>
-           <strong> <%= result.title %> </strong>
+            <h3><strong>
+                <%= result.title %>
+              </strong></h3>
           </li>
           <li>
-           Total Points: <strong><%= result.total_points %></strong>
+            <h3>Total Points: <strong>
+                <%= result.total_points %>
+              </strong></h3>
           </li>
         </ol>
-          <% } %>
+        <% } %>
 
     </div>
 </body>

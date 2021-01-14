@@ -1,5 +1,6 @@
 $middle: center;
 h1 {
+    font-size: calc(1.375rem + 1.5vw);
     text-align: $middle;
   }
 
@@ -9,12 +10,14 @@ h2 {
   }
 
 #results {
-    max-width: 300px;
-    margin: 0 auto 50px auto;
+    margin: 5em 30em;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     ol {
+      display: flex;
+      flex-direction: column;
+      align-items: $middle;
       li {
         list-style-type: none;
       }
