@@ -48,7 +48,8 @@ module.exports = (db) => {
           console.log(body);
           console.log(error);
         });
-        res.redirect('/:survey_id/links');
+        const survey_id = data.rows[0].id;
+        res.redirect(`/${survey_id}/links`);
       })
       .catch(err => {
         res
