@@ -1,4 +1,4 @@
-LIteVote. 
+LiteVote. 
 =========
 
 ## About
